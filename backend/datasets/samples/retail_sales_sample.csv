@@ -1,0 +1,51 @@
+﻿order_id,date,product,category,region,units,unit_price,revenue,customer_id
+1001,2024-01-05,iPhone 15,Electronics,North,2,79999,159998,C001
+1002,2024-01-06,Nike Air Max,Clothing,South,3,8999,26997,C002
+1003,2024-01-07,Samsung TV,Electronics,West,1,54999,54999,C003
+1004,2024-01-08,Laptop Pro,Electronics,East,1,89999,89999,C004
+1005,2024-01-09,Cotton Kurta,Clothing,North,5,1299,6495,C005
+1006,2024-01-10,Air Fryer,Home,South,2,4999,9998,C006
+1007,2024-01-12,AirPods Pro,Electronics,West,4,24999,99996,C001
+1008,2024-01-13,Levis Jeans,Clothing,North,2,3499,6998,C007
+1009,2024-01-14,Instant Pot,Home,East,1,7999,7999,C008
+1010,2024-01-15,iPhone 15,Electronics,South,3,79999,239997,C009
+1011,2024-01-18,Samsung TV,Electronics,West,2,54999,109998,C010
+1012,2024-01-19,Nike Air Max,Clothing,North,1,8999,8999,C002
+1013,2024-01-20,Laptop Pro,Electronics,South,1,89999,89999,C011
+1014,2024-01-22,AirPods Pro,Electronics,East,2,24999,49998,C012
+1015,2024-01-25,Cotton Kurta,Clothing,West,8,1299,10392,C013
+1016,2024-02-01,iPhone 15,Electronics,North,4,79999,319996,C014
+1017,2024-02-03,Samsung TV,Electronics,South,1,54999,54999,C015
+1018,2024-02-05,Laptop Pro,Electronics,West,2,89999,179998,C016
+1019,2024-02-07,Air Fryer,Home,East,3,4999,14997,C017
+1020,2024-02-09,AirPods Pro,Electronics,North,5,24999,124995,C018
+1021,2024-02-12,Nike Air Max,Clothing,South,2,8999,17998,C019
+1022,2024-02-14,Instant Pot,Home,West,4,7999,31996,C020
+1023,2024-02-16,iPhone 15,Electronics,East,1,79999,79999,C021
+1024,2024-02-18,Levis Jeans,Clothing,North,3,3499,10497,C022
+1025,2024-02-20,Samsung TV,Electronics,South,2,54999,109998,C023
+1026,2024-03-02,Laptop Pro,Electronics,West,1,89999,89999,C024
+1027,2024-03-04,Air Fryer,Home,East,2,4999,9998,C025
+1028,2024-03-06,iPhone 15,Electronics,North,2,79999,159998,C026
+1029,2024-03-08,AirPods Pro,Electronics,South,3,24999,74997,C001
+1030,2024-03-10,Cotton Kurta,Clothing,West,6,1299,7794,C027
+1031,2024-03-12,Nike Air Max,Clothing,East,1,8999,8999,C028
+1032,2024-03-14,Instant Pot,Home,North,2,7999,15998,C029
+1033,2024-03-16,Samsung TV,Electronics,South,1,54999,54999,C030
+1034,2024-03-18,Laptop Pro,Electronics,West,3,89999,269997,C031
+1035,2024-03-20,Levis Jeans,Clothing,East,4,3499,13996,C032
+1036,2024-04-01,iPhone 15,Electronics,North,5,79999,399995,C033
+1037,2024-04-03,Air Fryer,Home,South,1,4999,4999,C034
+1038,2024-04-05,AirPods Pro,Electronics,West,6,24999,149994,C035
+1039,2024-04-07,Samsung TV,Electronics,East,2,54999,109998,C036
+1040,2024-04-09,Cotton Kurta,Clothing,North,10,1299,12990,C037
+1041,2024-04-12,Laptop Pro,Electronics,South,1,89999,89999,C038
+1042,2024-04-14,Nike Air Max,Clothing,West,3,8999,26997,C039
+1043,2024-04-16,Instant Pot,Home,East,5,7999,39995,C040
+1044,2024-04-18,iPhone 15,Electronics,North,2,79999,159998,C041
+1045,2024-04-20,Levis Jeans,Clothing,South,2,3499,6998,C042
+1046,2024-05-02,Samsung TV,Electronics,West,3,54999,164997,C043
+1047,2024-05-04,AirPods Pro,Electronics,East,4,24999,99996,C044
+1048,2024-05-06,Laptop Pro,Electronics,North,2,89999,179998,C045
+1049,2024-05-08,Air Fryer,Home,South,6,4999,29994,C046
+1050,2024-05-10,iPhone 15,Electronics,West,3,79999,239997,C047
