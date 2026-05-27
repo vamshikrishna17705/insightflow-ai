@@ -1,5 +1,7 @@
 # ⚡ InsightFlow AI — Intelligent Business Analytics Platform
-
+## 🌐 Live Demo
+- **App:** https://insightflow-hkyh5pwa0-vamshi-krishnas-projects1.vercel.app
+- **API:** https://insightflow-ai-backend.onrender.com/docs
 > Upload raw business data → get AI-powered dashboards, forecasts, anomaly detection, and plain-English insights automatically.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat-square)
