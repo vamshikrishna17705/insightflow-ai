@@ -1,0 +1,7 @@
+﻿venv/
+__pycache__/
+datasets/raw/
+datasets/clean/
+*.pyc
+*.pyo
+test_gemini.py
