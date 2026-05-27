@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const API = 'http://localhost:8000'
+const API = 'https://insightflow-ai-backend.onrender.com'
 
 const theme = {
   bg: '#060612',
