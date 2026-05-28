@@ -57,6 +57,7 @@ def forecast_xgboost(df: pd.DataFrame, target_col: str, periods: int = 6) -> dic
         "lower_bound":  [round(p - 1.96 * std, 2) for p in preds],
         "upper_bound":  [round(p + 1.96 * std, 2) for p in preds],
         "mape_estimate": 4.2,
+        "actuals": [round(float(v), 2) for v in y[-15:]],
     }
 
 

@@ -24,19 +24,61 @@ def run_etl_pipeline(file_path: str, dataset_id: str) -> dict:
 def extract(file_path: str) -> pd.DataFrame:
     path = Path(file_path)
     ext = path.suffix.lower()
+    
     if ext == ".csv":
         for enc in ["utf-8", "latin-1", "cp1252"]:
             try:
                 return pd.read_csv(file_path, encoding=enc)
-            except UnicodeDecodeError:
+            except Exception:
                 continue
+    elif ext in [".tsv", ".txt"]:
+        for sep in ["\t", ",", ";"]:
+            for enc in ["utf-8", "latin-1", "cp1252"]:
+                try:
+                    df = pd.read_csv(file_path, sep=sep, encoding=enc)
+                    if len(df.columns) > 1: # Successfully split columns
+                        return df
+                except Exception:
+                    continue
     elif ext in [".xlsx", ".xls"]:
         return pd.read_excel(file_path)
     elif ext == ".json":
-        return pd.read_json(file_path)
+        try:
+            return pd.read_json(file_path)
+        except Exception:
+            # Try reading line-delimited json
+            return pd.read_json(file_path, lines=True)
     elif ext == ".parquet":
         return pd.read_parquet(file_path)
-    raise ValueError(f"Unsupported file format: {ext}")
+    elif ext == ".xml":
+        try:
+            return pd.read_xml(file_path)
+        except Exception as e:
+            raise ValueError(f"Failed to read XML: {str(e)}")
+            
+    # Unknown extension or fallback check: try parsing as CSV/TSV, then JSON
+    for enc in ["utf-8", "latin-1"]:
+        try:
+            # Try as CSV
+            df = pd.read_csv(file_path, sep=",", encoding=enc)
+            if len(df.columns) > 1 and len(df) > 0:
+                return df
+        except Exception:
+            pass
+        try:
+            # Try as TSV
+            df = pd.read_csv(file_path, sep="\t", encoding=enc)
+            if len(df.columns) > 1 and len(df) > 0:
+                return df
+        except Exception:
+            pass
+        try:
+            # Try as JSON
+            return pd.read_json(file_path)
+        except Exception:
+            pass
+            
+    raise ValueError(f"Unsupported or unparseable file format: {ext or 'None'}")
 
 
 def clean(df: pd.DataFrame) -> tuple:
