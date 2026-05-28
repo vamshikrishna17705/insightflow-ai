@@ -197,23 +197,32 @@ function NavItem({ icon: Icon, label, active, onClick, badge }) {
 }
 
 function LoginPage({ onLogin }) {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!username.trim() || !password.trim()) {
+    if (!email.trim() || !password.trim()) {
       setError('Please fill in all fields.')
+      return
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email.trim())) {
+      setError('Please enter a valid email address.')
+      return
+    }
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters.')
       return
     }
     setLoading(true)
     setError('')
     setTimeout(() => {
-      const success = onLogin(username.trim(), password)
+      const success = onLogin(email.trim(), password)
       if (!success) {
-        setError('Invalid username or password.')
+        setError('Login failed. Please check your credentials.')
         setLoading(false)
       }
     }, 800)
@@ -295,12 +304,12 @@ function LoginPage({ onLogin }) {
 
         <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 18 }}>
           <div>
-            <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: theme.textSecondary, marginBottom: 8, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Username</label>
+            <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: theme.textSecondary, marginBottom: 8, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Email Address</label>
             <input
               type="text"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              placeholder="e.g. admin"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="e.g. name@company.com"
               disabled={loading}
               style={{
                 width: '100%',
@@ -395,7 +404,7 @@ function LoginPage({ onLogin }) {
         </form>
 
         <div style={{ marginTop: 24, fontSize: 10, color: theme.textMuted, textAlign: 'center', letterSpacing: '0.2px' }}>
-          Default Demo: <span style={{ color: theme.cyan, fontFamily: 'monospace' }}>admin</span> / <span style={{ color: theme.cyan, fontFamily: 'monospace' }}>admin123</span>
+          Enter **any valid email** and **any password** (min. 6 characters) to access the workspace.
         </div>
       </div>
     </div>
@@ -959,6 +968,27 @@ function ChatMessage({ text, sender, isMobile }) {
   )
 }
 
+const extractUsername = (email) => {
+  if (!email) return 'User'
+  const localPart = email.split('@')[0]
+  const cleanPart = localPart.replace(/[\._\-]+/g, ' ')
+  const formatted = cleanPart
+    .split(' ')
+    .filter(Boolean)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ')
+  return formatted || 'User'
+}
+
+const getInitials = (name) => {
+  if (!name) return 'U'
+  const parts = name.trim().split(' ').filter(Boolean)
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[1][0]).toUpperCase()
+  }
+  return name.substring(0, 1).toUpperCase()
+}
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true')
   const [user, setUser] = useState(() => {
@@ -969,9 +999,11 @@ export default function App() {
     }
   })
 
-  const handleLogin = (username, password) => {
-    if (username.toLowerCase() === 'admin' && password === 'admin123') {
-      const userData = { username, loginTime: new Date().toISOString() }
+  const handleLogin = (email, password) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (emailRegex.test(email.trim()) && password.length >= 6) {
+      const username = extractUsername(email)
+      const userData = { username, email: email.trim(), loginTime: new Date().toISOString() }
       localStorage.setItem('isLoggedIn', 'true')
       localStorage.setItem('user', JSON.stringify(userData))
       setIsLoggedIn(true)
@@ -1395,7 +1427,7 @@ export default function App() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 13, fontWeight: 700, color: '#000',
                 boxShadow: accentGlow(theme.blue),
-              }}>{(user?.username || 'A').substring(0, 1).toUpperCase()}</div>
+              }}>{getInitials(user?.username)}</div>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{user?.username || 'Admin'}</div>
                 <div style={{ fontSize: 10, color: theme.textMuted }}>InsightFlow Pro</div>
