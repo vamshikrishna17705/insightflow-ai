@@ -196,6 +196,212 @@ function NavItem({ icon: Icon, label, active, onClick, badge }) {
   )
 }
 
+function LoginPage({ onLogin }) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!username.trim() || !password.trim()) {
+      setError('Please fill in all fields.')
+      return
+    }
+    setLoading(true)
+    setError('')
+    setTimeout(() => {
+      const success = onLogin(username.trim(), password)
+      if (!success) {
+        setError('Invalid username or password.')
+        setLoading(false)
+      }
+    }, 800)
+  }
+
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100vh',
+      width: '100vw',
+      background: theme.bg,
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      <Orbs />
+      
+      {/* Glass Card */}
+      <div style={{
+        background: 'rgba(255, 255, 255, 0.015)',
+        border: `1px solid ${theme.border}`,
+        borderRadius: 24,
+        padding: 40,
+        width: '100%',
+        maxWidth: 400,
+        backdropFilter: 'blur(24px)',
+        boxShadow: cardGlow,
+        zIndex: 10,
+        animation: 'fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
+        {/* Glowing Logo */}
+        <div style={{
+          width: 54, height: 54, borderRadius: 16,
+          background: 'linear-gradient(135deg, #7c3aed, #d946ef)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 28, marginBottom: 16, boxShadow: accentGlow(theme.accent),
+          color: '#fff'
+        }}>⚡</div>
+        
+        <h2 style={{
+          fontSize: 24, fontWeight: 800,
+          background: 'linear-gradient(90deg, #fff, #d946ef)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          marginBottom: 6,
+          letterSpacing: '-0.5px'
+        }}>
+          InsightFlow AI
+        </h2>
+        
+        <p style={{
+          fontSize: 12, color: theme.textSecondary,
+          marginBottom: 32, fontFamily: 'monospace',
+          letterSpacing: '1px', textTransform: 'uppercase'
+        }}>
+          Secure Analytics Gate
+        </p>
+
+        {error && (
+          <div style={{
+            background: 'rgba(239, 68, 68, 0.1)',
+            border: `1px solid ${theme.red}30`,
+            color: theme.red,
+            fontSize: 12,
+            padding: '10px 14px',
+            borderRadius: 10,
+            marginBottom: 20,
+            width: '100%',
+            textAlign: 'center',
+            animation: 'fadeIn 0.2s ease',
+          }}>
+            ⚠️ {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 18 }}>
+          <div>
+            <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: theme.textSecondary, marginBottom: 8, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              placeholder="e.g. admin"
+              disabled={loading}
+              style={{
+                width: '100%',
+                background: theme.bg3,
+                border: `1px solid ${theme.border}`,
+                borderRadius: 12,
+                padding: '12px 16px',
+                color: '#fff',
+                fontSize: 13,
+                outline: 'none',
+                transition: 'border-color 0.2s, box-shadow 0.2s',
+              }}
+              onFocus={e => {
+                e.target.style.borderColor = theme.accent
+                e.target.style.boxShadow = `0 0 12px ${theme.accent}30`
+              }}
+              onBlur={e => {
+                e.target.style.borderColor = theme.border
+                e.target.style.boxShadow = 'none'
+              }}
+            />
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: 10, fontWeight: 700, color: theme.textSecondary, marginBottom: 8, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="••••••••"
+              disabled={loading}
+              style={{
+                width: '100%',
+                background: theme.bg3,
+                border: `1px solid ${theme.border}`,
+                borderRadius: 12,
+                padding: '12px 16px',
+                color: '#fff',
+                fontSize: 13,
+                outline: 'none',
+                transition: 'border-color 0.2s, box-shadow 0.2s',
+              }}
+              onFocus={e => {
+                e.target.style.borderColor = theme.accent
+                e.target.style.boxShadow = `0 0 12px ${theme.accent}30`
+              }}
+              onBlur={e => {
+                e.target.style.borderColor = theme.border
+                e.target.style.boxShadow = 'none'
+              }}
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              background: 'linear-gradient(135deg, #7c3aed, #d946ef)',
+              border: 'none',
+              borderRadius: 12,
+              color: '#fff',
+              padding: '14px',
+              fontSize: 13,
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: accentGlow(theme.accent2),
+              marginTop: 10,
+              transition: 'all 0.2s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8
+            }}
+            onMouseEnter={e => {
+              if (!loading) e.currentTarget.style.transform = 'translateY(-1px)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+          >
+            {loading ? (
+              <span style={{
+                display: 'inline-block',
+                width: 14, height: 14,
+                border: '2px solid rgba(255,255,255,0.3)',
+                borderTop: '2px solid #fff',
+                borderRadius: '50%',
+                animation: 'spin 0.5s linear infinite'
+              }} />
+            ) : 'ENTER WORKSPACE'}
+          </button>
+        </form>
+
+        <div style={{ marginTop: 24, fontSize: 10, color: theme.textMuted, textAlign: 'center', letterSpacing: '0.2px' }}>
+          Default Demo: <span style={{ color: theme.cyan, fontFamily: 'monospace' }}>admin</span> / <span style={{ color: theme.cyan, fontFamily: 'monospace' }}>admin123</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function KPICard({ label, value, color, description, icon }) {
   return (
     <div style={{
@@ -754,6 +960,34 @@ function ChatMessage({ text, sender, isMobile }) {
 }
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true')
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('user')) || null
+    } catch {
+      return null
+    }
+  })
+
+  const handleLogin = (username, password) => {
+    if (username.toLowerCase() === 'admin' && password === 'admin123') {
+      const userData = { username, loginTime: new Date().toISOString() }
+      localStorage.setItem('isLoggedIn', 'true')
+      localStorage.setItem('user', JSON.stringify(userData))
+      setIsLoggedIn(true)
+      setUser(userData)
+      return true
+    }
+    return false
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn')
+    localStorage.removeItem('user')
+    setIsLoggedIn(false)
+    setUser(null)
+  }
+
   const [apiBase, setApiBase] = useState(API_CANDIDATES[0])
   const [datasetId, setDatasetId] = useState(localStorage.getItem('dataset_id') || '')
   
@@ -1099,6 +1333,10 @@ export default function App() {
     { id: 'chat', icon: Icons.Chat, label: 'Ask Data' },
   ]
 
+  if (!isLoggedIn) {
+    return <LoginPage onLogin={handleLogin} />
+  }
+
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: theme.bg, color: theme.text }}>
       <Orbs />
@@ -1149,18 +1387,47 @@ export default function App() {
 
         {/* User Card */}
         <div style={{ padding: '20px 24px', borderTop: `1px solid ${theme.border}`, background: 'rgba(255, 255, 255, 0.01)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{
-              width: 38, height: 38, borderRadius: '50%',
-              background: 'linear-gradient(135deg, #10b981, #3b82f6)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 14, fontWeight: 700, color: '#000',
-              boxShadow: accentGlow(theme.blue),
-            }}>U</div>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 600 }}>Guest User</div>
-              <div style={{ fontSize: 10, color: theme.textMuted }}>InsightFlow Pro</div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: '50%',
+                background: 'linear-gradient(135deg, #10b981, #3b82f6)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 13, fontWeight: 700, color: '#000',
+                boxShadow: accentGlow(theme.blue),
+              }}>{(user?.username || 'A').substring(0, 1).toUpperCase()}</div>
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{user?.username || 'Admin'}</div>
+                <div style={{ fontSize: 10, color: theme.textMuted }}>InsightFlow Pro</div>
+              </div>
             </div>
+            <button
+              onClick={handleLogout}
+              title="Sign Out"
+              style={{
+                background: 'rgba(239, 68, 68, 0.1)',
+                border: `1px solid ${theme.red}30`,
+                color: theme.red,
+                borderRadius: 8,
+                width: 28, height: 28,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 12,
+                transition: 'all 0.2s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.2)'
+                e.currentTarget.style.borderColor = theme.red
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'
+                e.currentTarget.style.borderColor = `${theme.red}30`
+              }}
+            >
+              🚪
+            </button>
           </div>
         </div>
       </div>
