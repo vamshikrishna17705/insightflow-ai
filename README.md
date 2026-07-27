@@ -1,22 +1,19 @@
-# ⚡ InsightFlow AI — Intelligent Business Analytics Platform
-## 🌐 Live Demo
-- **App:** https://insightflow-hkyh5pwa0-vamshi-krishnas-projects1.vercel.app
-- **API:** https://insightflow-ai-backend.onrender.com/docs
-> Upload raw business data → get AI-powered dashboards, forecasts, anomaly detection, and plain-English insights automatically.
+# InsightFlow AI 🧠
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat-square)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.110-green?style=flat-square)
-![React](https://img.shields.io/badge/React-Vite-61dafb?style=flat-square)
-![Gemini](https://img.shields.io/badge/Gemini-AI-orange?style=flat-square)
+**AI-powered Business Analytics Platform** — Transform raw data into intelligent dashboards, forecasts, anomalies, and actionable insights automatically.
+
+## 🌐 Live Demo
+- **App**: https://insightflow-ai-sigma.vercel.app
+- **API**: Full-stack production deployment
 
 ## 🎯 What It Does
 
 | Step | What Happens |
 |------|-------------|
-| 📤 Upload | Drag-drop CSV / Excel / JSON |
-| 🔧 ETL | Auto-clean, deduplicate, type-infer, feature-engineer |
-| 📊 Dashboard | KPI cards, revenue trends, column analytics |
-| 🚨 Anomalies | Flag outliers using Isolation Forest |
+| 📤 Upload | Drag-drop CSV / Excel / JSON files |
+| 🔧 ETL | Auto-clean, deduplicate, type-infer, feature-engineer data |
+| 📊 Dashboard | Real-time KPI cards, trends, column analytics |
+| 🚨 Anomalies | Detect outliers using Isolation Forest |
 | 🤖 AI Insights | Gemini generates plain-English business insights |
 | 💬 Chat | Ask natural language questions about your data |
 
@@ -24,24 +21,54 @@
 
 **Backend:** Python · FastAPI · Pandas · Scikit-learn · XGBoost · Gemini AI
 
-**Frontend:** React · Vite · Glassmorphism UI
+**Frontend:** React · Vite · Next.js · Glassmorphism UI
 
-**ML Models:** Isolation Forest · XGBoost · K-Means
+**Infrastructure:** Vercel Deployment · RESTful APIs · JWT Authentication
+
+**ML Models:** Isolation Forest · XGBoost · K-Means Clustering
+
+## ✨ Key Features
+
+- **Real-time Analytics**: Instant data processing and visualization
+- **AI-Powered Insights**: Automated business intelligence generation
+- **Anomaly Detection**: Identify outliers and suspicious patterns
+- **Data ETL**: Fully automated data cleaning and preprocessing
+- **Responsive UI**: Modern glassmorphism design with full responsiveness
+- **Full-Stack Architecture**: Scalable backend with Express.js/FastAPI
 
 ## 🚀 Quick Start
 
 ```bash
-# Backend
+# Backend Setup
 cd backend
 python -m venv venv
-venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 
-# Frontend
+# Frontend Setup
 cd frontend
 npm install
 npm run dev
 ```
 
-Add your Gemini API key to `backend/.env`:
+## 📦 Installation
+
+```bash
+git clone https://github.com/vamshikrishna17705/insightflow-ai.git
+cd insightflow-ai
+npm install
+npm run dev
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+MIT License - feel free to use this project for personal and commercial purposes.
+
+---
+
+**Built with ❤️ by Vamshi Krishna**
