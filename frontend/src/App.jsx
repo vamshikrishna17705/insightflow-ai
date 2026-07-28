@@ -8,8 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  BarChart,
-  Bar,
   PieChart,
   Pie,
   Cell,
@@ -1089,14 +1087,18 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 1024)
+    const handleResize = () => {
+      const isMobileNow = window.innerWidth < 1024
+      setIsMobile(isMobileNow)
+      if (!isMobileNow) {
+        setSidebarOpen(false)
+      }
+    }
+    // Set initial state
+    handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  useEffect(() => {
-    if (!isMobile) setSidebarOpen(false)
-  }, [isMobile])
+  }, []
 
   // If a dataset is loaded and we change page, load its data dynamically
   const clearCache = () => {
